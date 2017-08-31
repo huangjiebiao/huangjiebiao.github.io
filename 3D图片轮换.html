@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+	@-webkit-keyframes show{
+		0%{
+			-webkit-transform:rotateX(180deg);
+			opacity: 0;
+		}
+		100%{
+			-webkit-transform:rotateX(0deg);
+			opacity: 1;
+		}
+	}
+	@-webkit-keyframes hidden{
+		0%{
+			-webkit-transform:rotateX(0deg);
+			opacity: 1;
+		}
+		100%{
+			-webkit-transform:rotateX(-180deg);
+			opacity: 0;
+		}
+	}
+		#wrap{width: 400px;height: 300px;position: relative;margin: 100px auto;-webkit-transform-style:preserve-3d;-webkit-perspective:800px}
+		img{width: 400px;height: 300px;position: absolute;left: 0;top: 0px;-webkit-transform-origin:bottom;-webkit-transform:rotateX(180deg);
+			opacity: 0}
+		input{width: 70px;height: 70px;border-radius: 50%;background: #000;color: #fff;position: absolute;top: 150px;outline:none;}
+		#wrap input:nth-of-type(1){left: -120px;}
+		#wrap input:nth-of-type(2){right: -120px;}
+		.show{-webkit-transform:rotateX(0deg);opacity:1;-webkit-animation:1s show;}
+		.hidden{-webkit-transform:rotateX(180deg);opacity: 0;-webkit-animation:1s hidden;}
+	</style>
+</head>
+<body>
+<div id="wrap">
+	<input type="button" value="上一张" >
+	<img src="img/img1.jpg" class="show" >
+	<img src="img/img2.jpg" >
+	<img src="img/img3.jpg">
+	<img src="img/img4.jpg">
+	<img src="img/img5.jpg">
+	<img src="img/img6.jpg">
+	<input type="button" value="下一张" >
+</div>
+</body>
+<script>
+window.onload=function()
+{
+	var oWrap=document.getElementById("wrap");
+	var aBtn=oWrap.getElementsByTagName("input");
+	var aImg=oWrap.getElementsByTagName("img");
+	var iNow=0;
+	aBtn[0].onclick=function()
+	{
+		aImg[iNow].className="hidden";
+		iNow--;
+		if(iNow<0)
+		{
+			iNow=aImg.length-1;
+		}
+		aImg[iNow].className="show";
+	};
+	aBtn[1].onclick=function()
+	{
+		aImg[iNow].className="hidden";
+		iNow++;
+		if(iNow>=aImg.length)
+		{
+			iNow=0;
+		}
+		aImg[iNow].className="show";
+	};
+};
+</script>
+</html>
